@@ -1,43 +1,34 @@
+# --- PROD profile overrides ---
 server:
-  port: 8040
-  servlet:
-    context-path: /api/v1
+  port: ${NOTIF_PORT:8040}
 
 spring:
   data:
     mongodb:
-      username: dodo25
-      password: dodo25
-      host: localhost
-      port: 27017
-      database: notification
-      authentication-database: admin
+      username: ${MONGO_USER:notification}
+      password: ${MONGO_PASSWORD:changeMe!}
+      host: ${MONGO_HOST:mongo}
+      port: ${MONGO_PORT:27017}
+      database: ${MONGO_DB:notification}
+      authentication-database: ${MONGO_AUTH_DB:admin}
 
   kafka:
     consumer:
-      bootstrap-servers: localhost:9092
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
-        spring.json.trusted.packages: '*'
-        spring.json.type.mapping: >
-          saleConfirmation:com.dodo.dodashx.kafka.sale.SaleConfirmation,
-          paymentConfirmation:com.dodo.dodashx.kafka.payment.PaymentConfirmation,
-          purchaseConfirmation:com.dodo.dodashx.kafka.purchase.PurchaseConfirmation
+      # En prod, pointer vers le cluster Kafka (service docker ou externe)
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
 
   mail:
-    host: localhost
-    port: 1025
-    username: alibou
-    password: alibou
+    host: ${MAIL_HOST:mailhog}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
     properties:
       mail:
         smtp:
-          trust: "*"
-        auth: true
+          trust: "${MAIL_SMTP_TRUST:*}"
+        auth: ${MAIL_SMTP_AUTH:true}
         starttls:
-          enabled: true
-        connectiontimeout: 5000
-        timeout: 3000
-        writetimeout: 5000
+          enabled: ${MAIL_STARTTLS_ENABLED:true}
+        connectiontimeout: ${MAIL_CONNECTION_TIMEOUT:5000}
+        timeout: ${MAIL_TIMEOUT:3000}
+        writetimeout: ${MAIL_WRITE_TIMEOUT:5000}

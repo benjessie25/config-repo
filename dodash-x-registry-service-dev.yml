@@ -1,3 +1,7 @@
+# --- DEV profile overrides ---
+server:
+  port: 8090
+
 spring:
   data:
     mongodb:
@@ -7,8 +11,3 @@ spring:
       port: 27017
       database: dodash_registry
       authentication-database: admin
-server:
-  port: 8090
-  servlet:
-    context-path: /api/v1/registry
-

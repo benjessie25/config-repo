@@ -1,18 +1,15 @@
+# --- Shared defaults served by Config Server for ALL profiles ---
 server:
-  port: 8050
   servlet:
     context-path: /api/v1
+
 spring:
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5433/product_server
-    username: dodo25
-    password: dodo25
   jpa:
     hibernate:
       ddl-auto: update
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
   flyway:
     baseline-on-migrate: true
     enabled: true
@@ -21,7 +18,16 @@ spring:
     user: ${spring.datasource.username}
     password: ${spring.datasource.password}
 
+# Application custom settings
 application:
   config:
-    registry-url: http://localhost:8222/api/v1/registry
-    cloud-storage-url: http://localhost:8222/api/v1/upload
+    # Can be overridden via env on clients if needed
+    registry-url: ${REGISTRY_URL:http://localhost:8222/api/v1/registry}
+    cloud-storage-url: ${CLOUD_STORAGE_URL:http://localhost:8222/api/v1/upload}
+
+# Expose actuator endpoints useful for config refresh
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh

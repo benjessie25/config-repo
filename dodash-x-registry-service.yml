@@ -1,14 +1,13 @@
-spring:
-  data:
-    mongodb:
-      username: dodo25
-      password: dodo25
-      host: localhost
-      port: 27017
-      database: dodash_registry
-      authentication-database: admin
+# --- Shared defaults served by Config Server for ALL profiles ---
+
+# Contexte API commun
 server:
-  port: 8090
   servlet:
     context-path: /api/v1/registry
 
+# Actuator utiles pour refresh à chaud
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh
