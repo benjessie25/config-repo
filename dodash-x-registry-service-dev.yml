@@ -1,0 +1,14 @@
+spring:
+  data:
+    mongodb:
+      username: dodo25
+      password: dodo25
+      host: localhost
+      port: 27017
+      database: dodash_registry
+      authentication-database: admin
+server:
+  port: 8090
+  servlet:
+    context-path: /api/v1/registry
+

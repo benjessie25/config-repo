@@ -1,0 +1,11 @@
+server:
+  port: 8463
+  servlet:
+    context-path: /api/v1
+
+
+cloudinary:
+  cloud-name: da8ljr91k
+  api-key: 274678121844943
+  api-secret: 7iJ4qpy9hki7YXZzyt4Xzrf0T8c
+  upload-preset: dodashx_unsigned_preset

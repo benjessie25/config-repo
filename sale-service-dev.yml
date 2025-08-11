@@ -1,0 +1,49 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /api/v1
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/sale_server
+    username: dodo25
+    password: dodo25
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: saleConfirmation:com.dodo.dodashx.kafka.SaleConfirmation
+  cache:
+    type: caffeine
+    caches:
+      product-name-cache:
+        spec: maximumSize=1000,expireAfterWrite=2h
+      unit-cache:
+        spec: maximumSize=500,expireAfterWrite=6h
+      category-cache:
+        spec: maximumSize=300,expireAfterWrite=12h
+application:
+  config:
+    product-url: http://localhost:8222/api/v1/products
+    registry-url: http://localhost:8222/api/v1/registry
+#    payment-url: http://localhost:8222/api/v1/payments
+
+
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.dodo.dodashx.config.FeignClientErrorDecoder
+
+
+logging:
+  level:
+    com.dodo.dodashx: INFO
+    com.dodo.dodashx.CacheMonitorService: DEBUG

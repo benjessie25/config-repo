@@ -1,0 +1,27 @@
+server:
+  port: 8050
+  servlet:
+    context-path: /api/v1
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/product_server
+    username: dodo25
+    password: dodo25
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    baseline-on-migrate: true
+    enabled: true
+    baseline-description: "init"
+    baseline-version: 0
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+
+application:
+  config:
+    registry-url: http://localhost:8222/api/v1/registry
+    cloud-storage-url: http://localhost:8222/api/v1/upload

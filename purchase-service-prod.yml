@@ -1,0 +1,50 @@
+server:
+  port: 8070
+  servlet:
+    context-path: /api/v1
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/purchase_server
+    username: dodo25
+    password: dodo25
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _history       # suffixe des tables d'audit (par défaut : _AUD)
+            revision_field_name: revision         # nom de la colonne pour la révision (par défaut : REV)
+            revision_type_field_name: revision_type # nom du champ de type de révision (par défaut : REVTYPE)
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/migration/db.changelog-master.xml
+    drop-first: false
+    default-schema: public
+
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: purchaseConfirmation:com.dodo.dodashx.kafka.PurchaseConfirmation
+
+application:
+  config:
+    product-url: http://localhost:8222/api/v1/products
+#    customer-url: http://localhost:8222/api/v1/registry
+#    payment-url: http://localhost:8222/api/v1/payments
+
+
+feign:
+  client:
+    config:
+      default:
+        errorDecoder: com.dodo.dodashx.config.FeignClientErrorDecoder

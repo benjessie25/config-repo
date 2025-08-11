@@ -1,0 +1,43 @@
+server:
+  port: 8040
+  servlet:
+    context-path: /api/v1
+
+spring:
+  data:
+    mongodb:
+      username: dodo25
+      password: dodo25
+      host: localhost
+      port: 27017
+      database: notification
+      authentication-database: admin
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.json.type.mapping: >
+          saleConfirmation:com.dodo.dodashx.kafka.sale.SaleConfirmation,
+          paymentConfirmation:com.dodo.dodashx.kafka.payment.PaymentConfirmation,
+          purchaseConfirmation:com.dodo.dodashx.kafka.purchase.PurchaseConfirmation
+
+  mail:
+    host: localhost
+    port: 1025
+    username: alibou
+    password: alibou
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enabled: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
