@@ -5,4 +5,9 @@ server:
 spring:
   data:
     mongodb:
-      uri: ${MONGODB_URI:mongodb://${MONGO_USER:registry}:${MONGO_PASSWORD:Mongo@2025}@${MONGO_HOST:mongo}:${MONGO_PORT:27017}/${MONGO_DB:dodash_registry}?authSource=${MONGO_AUTH_DB:admin}}
+      host: ${MONGO_HOST:mongo}
+      port: ${MONGO_PORT:27017}
+      database: ${MONGO_DB:dodash_registry}
+      username: ${MONGO_USER:registry}
+      password: ${MONGO_PASSWORD:Mongo@2025}
+      authentication-database: ${MONGO_AUTH_DB:admin}
