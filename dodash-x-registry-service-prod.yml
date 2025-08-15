@@ -1,14 +1,8 @@
 # --- PROD profile overrides ---
 server:
-  port: ${REGISTRY_PORT:8090}
+  port: ${REGISTRY_HTTP_PORT:8090}
 
 spring:
   data:
     mongodb:
-      # Préférer les variables d'env en prod
-      username: ${MONGO_USER:registry}
-      password: ${MONGO_PASSWORD:changeMe!}
-      host: ${MONGO_HOST:mongo}
-      port: ${MONGO_PORT:27017}
-      database: ${MONGO_DB:dodash_registry}
-      authentication-database: ${MONGO_AUTH_DB:admin}
+      uri: ${MONGODB_URI:mongodb://${MONGO_USER:registry}:${MONGO_PASSWORD:Mongo@2025}@${MONGO_HOST:mongo}:${MONGO_PORT:27017}/${MONGO_DB:dodash_registry}?authSource=${MONGO_AUTH_DB:admin}}

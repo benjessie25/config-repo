@@ -1,0 +1,25 @@
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka
+name:
+  value: dodashx
+spring:
+  cloud:
+    config:
+      override-system-properties: false
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,refresh"
+  tracing:
+    sampling:
+      probability: 1.0
+      zipkin:
+        enabled: false
+

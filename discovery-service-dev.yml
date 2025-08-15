@@ -1,7 +1,9 @@
 # --- DEV profile overrides ---
 server:
-  port: 8761
+  port: ${DISCOVERY_PORT:8761}
 
 eureka:
   instance:
-    hostname: localhost
+    # En dev "tout docker", garde discovery-service.
+    # Si tu lances le serveur sur l'hôte, exporte EUREKA_HOSTNAME=localhost.
+    hostname: ${EUREKA_HOSTNAME:discovery-service}

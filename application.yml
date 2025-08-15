@@ -1,9 +1,10 @@
 eureka:
   instance:
-    hostname: localhost
+    prefer-ip-address: false
+    hostname: ${HOSTNAME:${SPRING_APPLICATION_NAME}}   # ← prend le nom du conteneur si possible
   client:
     service-url:
-      defaultZone: http://discovery-service:8761/eureka
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://discovery-service:8761/eureka}
 name:
   value: dodashx
 spring:
@@ -19,7 +20,8 @@ management:
         include: "health,info,refresh"
   tracing:
     sampling:
-      probability: 1.0
+      probability: ${TRACING_SAMPLING:1.0}
       zipkin:
-        enabled: false
+        enabled: ${ZIPKIN_ENABLED:true}
+        endpoint: ${ZIPKIN_ENDPOINT:http://zipkin:9411/api/v2/spans}
 

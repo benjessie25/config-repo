@@ -1,13 +1,16 @@
 # --- Shared defaults served by Config Server for ALL profiles ---
 
-# Contexte API commun
 server:
   servlet:
     context-path: /api/v1/registry
 
-# Actuator utiles pour refresh à chaud
 management:
   endpoints:
     web:
       exposure:
         include: health,info,refresh
+  endpoint:
+    health:
+      show-details: "always"
+      probes:
+        enabled: true
