@@ -1,20 +1,22 @@
 server:
   port: ${GATEWAY_PORT:8222}
 
-#spring:
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: ${KEYCLOAK_ISSUER_URI}
+spring:
+  # security:
+  #   oauth2:
+  #     resourceserver:
+  #       jwt:
+  #         issuer-uri: ${KEYCLOAK_ISSUER_URI}
+
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
-          lowerCaseServiceId: true
+          lower-case-service-id: true
+
       routes:
-        # Registry
+        # Registry (PAS de rewrite: le service a déjà /api/v1/registry comme context-path)
         - id: dodash-x-registry-service
           uri: lb://DODASH-X-REGISTRY-SERVICE
           predicates:
@@ -56,11 +58,12 @@ server:
           predicates:
             - Path=/api/v1/notifications/**
 
-        # Cloud-storage
+        # Cloud-storage (deux predicates séparés)
         - id: cloud-storage-service
           uri: lb://CLOUD-STORAGE-SERVICE
           predicates:
-            - Path=/api/v1/files/**, /api/v1/upload/**
+            - Path=/api/v1/files/**
+            - Path=/api/v1/upload/**
 
       globalcors:
         corsConfigurations:
@@ -82,7 +85,6 @@ server:
 
 eureka:
   client:
-    # lis la var standard si elle est fournie par l'env; sinon utilise la valeur docker interne
     serviceUrl:
       defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://discovery-service:${DISCOVERY_PORT:8761}/eureka/}
 
