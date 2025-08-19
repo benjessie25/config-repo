@@ -14,20 +14,19 @@ spring:
 
   kafka:
     consumer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: localhost:19092
 
   mail:
     host: localhost
-    port: 1025
-    username: alibou
-    password: alibou
+    port: 11025           # <- MailDev SMTP exposé
+    username:
+    password:
     properties:
       mail:
         smtp:
-          trust: "*"
-        auth: true
-        starttls:
-          enabled: true
-        connectiontimeout: 5000
-        timeout: 3000
-        writetimeout: 5000
+          auth: false     # <- pas d’auth sur MailDev
+          starttls:
+            enable: false # <- pas de TLS sur MailDev
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
