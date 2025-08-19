@@ -24,4 +24,4 @@ management:
       probability: ${TRACING_SAMPLING:1.0}
   zipkin:
     enabled: ${ZIPKIN_ENABLED:true}
-    endpoint: ${ZIPKIN_ENDPOINT:http://localhost:${ZIPKIN_PORT:9411}/api/v2/spans}     # 👈 Zipkin local
+    endpoint: ${ZIPKIN_ENDPOINT:http://localhost:${ZIPKIN_PORT:19411}/api/v2/spans}     # 👈 Zipkin local
