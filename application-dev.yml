@@ -18,10 +18,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: "health,info,refresh"
+        include: "health,info,env,configprops"
   tracing:
     sampling:
       probability: ${TRACING_SAMPLING:1.0}
   zipkin:
-    enabled: ${ZIPKIN_ENABLED:true}
-    endpoint: ${ZIPKIN_ENDPOINT:http://localhost:${ZIPKIN_PORT:19411}/api/v2/spans}     # 👈 Zipkin local
+    tracing:
+      endpoint: ${ZIPKIN_ENDPOINT:http://127.0.0.1:${ZIPKIN_PORT:19411}/api/v2/spans}
+
