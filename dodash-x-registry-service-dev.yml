@@ -8,6 +8,6 @@ spring:
       host: localhost
       port: 27017
       database: dodash_registry
-      username: dodash_mg
-      password: Dodash#@2025
+      username: registry_user
+      password: Reg1stry@2025
       authentication-database: dodash_registry
