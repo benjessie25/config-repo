@@ -14,3 +14,15 @@ management:
       show-details: "always"
       probes:
         enabled: true
+
+
+codes:
+  category:
+    hierarchical: true     # true => PARENT-XXX, false => XXX
+    parentLength: 2        # ex: "Cahiers & Copies" -> "CR"
+    childLength: 3         # ex: "Stylos" -> "STY"
+    separator: "-"         # PARENT-CHILD
+  unit:
+    length: 3              # ex: "Pièce" -> "PIC" (ou "PIE" selon tes règles)
+  family:
+    length: 4
