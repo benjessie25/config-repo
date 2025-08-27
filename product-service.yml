@@ -6,17 +6,23 @@ server:
 spring:
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-  flyway:
-    baseline-on-migrate: true
+  liquibase:
     enabled: true
-    baseline-description: "init"
-    baseline-version: 0
-    user: ${spring.datasource.username}
-    password: ${spring.datasource.password}
+    change-log: classpath:db/migration/db.changelog-master.xml
+    drop-first: false
+    default-schema: public
+
+#  flyway:
+#    baseline-on-migrate: true
+#    enabled: true
+#    baseline-description: "init"
+#    baseline-version: 0
+#    user: ${spring.datasource.username}
+#    password: ${spring.datasource.password}
 
 # Application custom settings
 application:
