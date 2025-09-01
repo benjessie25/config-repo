@@ -12,7 +12,7 @@ spring:
 
   liquibase:
     enabled: true
-    change-log: classpath:db/migration/db.changelog-master.xml
+    change-log: classpath:db/migration/changelog-master.xml
     default-schema: public
 
 #  flyway:
