@@ -9,5 +9,5 @@ spring:
       port: 27017
       database: dodash_registry
       username: dodo25
-      password: dodo25@2025
+      password: dodo25
       authentication-database: admin
