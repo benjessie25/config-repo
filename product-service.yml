@@ -8,7 +8,6 @@ spring:
     hibernate:
       ddl-auto: validate
     database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
   liquibase:
     enabled: true
