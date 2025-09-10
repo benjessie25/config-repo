@@ -6,8 +6,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5433/purchase_server
-    username: dodash_pg
-    password: Dodash#@2025
+    username: postgres
+    password: postgres
 
   kafka:
     producer:
