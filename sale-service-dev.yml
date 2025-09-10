@@ -5,10 +5,10 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:15433/sale_server
-    username: dodash_pg
-    password: Dodash#@2025
+    url: jdbc:postgresql://localhost:5432/sale_server
+    username: postgres
+    password: postgres
 
   kafka:
     producer:
-      bootstrap-servers: localhost:19092
+      bootstrap-servers: localhost:9092
